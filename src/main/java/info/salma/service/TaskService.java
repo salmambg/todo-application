@@ -13,7 +13,7 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     public List<Task> getAllTasks () {
-        return  taskRepository.findAll();
+        return taskRepository.findAll();
     }
     public void addTasks(Task task) {
         taskRepository.save(task);
@@ -22,6 +22,10 @@ public class TaskService {
     public Task getTask(String id) {
         Optional<Task> task =taskRepository.findById(id);
         return task.orElse(null);
+    }
+
+    public void updateTask(String id, Task task) {
+        taskRepository.save(task);
     }
 
 

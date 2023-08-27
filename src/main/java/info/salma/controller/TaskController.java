@@ -27,6 +27,12 @@ public class TaskController {
         taskService.addTasks(task);
         return "Save task successfully";
     }
+    @RequestMapping(method = RequestMethod.PUT, value = "/tasks/{id}")
+    public String updateTask(@RequestBody Task task, @PathVariable String id) {
+        taskService.updateTask(id,task);
+        return "Update task successfully";
+
+    }
 
 
 }
