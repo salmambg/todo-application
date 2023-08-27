@@ -3,9 +3,8 @@ package info.salma.controller;
 import info.salma.entity.Task;
 import info.salma.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -23,5 +22,11 @@ public class TaskController {
     public Task getTask(@PathVariable String id) {
         return taskService.getTask(id);
     }
+    @RequestMapping(method = RequestMethod.POST, value = "/tasks")
+    public String addTopic(@RequestBody Task task) {
+        taskService.addTasks(task);
+        return "Save task successfully";
+    }
+
 
 }
