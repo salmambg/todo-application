@@ -2,19 +2,30 @@ package info.salma.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class ToDo {
+public class Todo {
     @Id
     private String id;
     private String name;
     private String description;
 
-    public ToDo () {
+    @ManyToOne
+    private Task task;
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public Todo() {
 
     }
 
-    public ToDo(String id, String name, String description) {
+    public Todo(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
