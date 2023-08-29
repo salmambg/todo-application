@@ -12,23 +12,27 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
-    @GetMapping("/toDos")
+    // all todo
+    @GetMapping("/todos")
     public List<Todo> getAllTodo () {
         return todoService.getAllToDo();
     }
 
-    @GetMapping("/toDos/{id}}")
+    // single todo
+    @GetMapping("/todos/{id}}")
     public Todo getToDo(@PathVariable String id) {
         return todoService.getToDo(id);
     }
 
-    @PostMapping("/toDo")
+    // save single todo
+    @PostMapping("/todos")
     public String addToDo(@RequestBody Todo toDo) {
         todoService.addToDo(toDo);
         return "Save ToDo successfully";
     }
 
-    @PostMapping(value = "/toDos/tasks/{taskId}")
+    // save single todo with task
+    @PostMapping(value = "/todos/tasks/{taskId}")
     public String addToDoTask(@RequestBody Todo toDo, @PathVariable String taskId) {
         toDo.setTask(new Task(taskId, "",""));
         todoService.addToDo(toDo);
