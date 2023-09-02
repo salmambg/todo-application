@@ -34,8 +34,20 @@ public class TodoController {
     // save single todo with task
     @PostMapping(value = "/todos/tasks/{taskId}")
     public String addToDoTask(@RequestBody Todo toDo, @PathVariable String taskId) {
-        toDo.setTask(new Task(taskId, "",""));
+        //toDo.setTask(new Task(taskId, "",""));
         todoService.addToDo(toDo);
         return "Save ToDo successfully";
     }
+    @PutMapping(value = "/todos/{id}")
+    public String updateTodo (@RequestBody Todo todo,@PathVariable String id) {
+    todoService.updateToDo(id, todo );
+    return "Update Course Successfully";
+    }
+
+    @DeleteMapping(value = "/todos/{id}")
+    public void deleteTopic (@PathVariable String id) {
+        todoService.deleteToDo(id);
+    }
+
+
 }
