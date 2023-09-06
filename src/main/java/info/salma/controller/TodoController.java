@@ -5,6 +5,8 @@ import info.salma.entity.Todo;
 import info.salma.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,11 +34,23 @@ public class TodoController {
     }
 
     // save single todo with task
-    @PostMapping(value = "/todos/tasks/{taskId}")
-    public String addToDoTask(@RequestBody Todo toDo, @PathVariable String taskId) {
-        //toDo.setTask(new Task(taskId, "",""));
-        todoService.addToDo(toDo);
-        return "Save ToDo successfully";
+    @PostMapping("/todos/tasks/{taskId}")
+    public String addToDoTask(@PathVariable String  taskId, @RequestParam String todoId) {
+        // Fetch the existing Todo by its ID
+        Todo todo = todoService.getTodoById(todoId);
+
+        // Create a new Task using taskId and associate it with the Todo
+        Task task = new Task();
+        task.setId(taskId);
+        task.setTodo(todo);
+
+        // Add the task to the Todo's list of tasks
+        todo.getTasks().add(task);
+
+        // Save the updated Todo to persist the association
+        todoService.saveTodoWithTasks(todo);
+
+        return "Task added to Todo successfully";
     }
     @PutMapping(value = "/todos/{id}")
     public String updateTodo (@RequestBody Todo todo,@PathVariable String id) {

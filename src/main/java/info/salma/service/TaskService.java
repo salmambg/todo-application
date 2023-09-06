@@ -31,4 +31,8 @@ public class TaskService {
     public void  DeleteTask(String id) {
         taskRepository.deleteById(id);
     }
+    public Task addTask(Task task) {
+        // Save the Task to persist it in the database
+        return taskRepository.save(task);
+    }
 }

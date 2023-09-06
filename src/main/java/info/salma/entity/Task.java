@@ -1,7 +1,11 @@
 package info.salma.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
@@ -12,6 +16,17 @@ public class Task {
 
     public Task () {
 
+    }
+    @ManyToOne
+    @JoinColumn(name = "todo_id")
+    @JsonIgnore
+    private Todo todo;
+    public Todo getTodo() {
+        return todo;
+    }
+
+    public void setTodo(Todo todo) {
+        this.todo = todo;
     }
 
     public Task(String id, String name, String description) {

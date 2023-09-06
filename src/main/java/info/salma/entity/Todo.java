@@ -1,8 +1,6 @@
 package info.salma.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -11,7 +9,7 @@ public class Todo {
     private String id;
     private String name;
     private String description;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "todo", fetch = FetchType.EAGER)
     private List<Task> tasks;
 
     public Todo() {

@@ -32,5 +32,15 @@ public class TodoService {
     public void deleteToDo(String id) {
         toDoRepository.deleteById(id);
     }
+    public Todo getTodoById(String  todoId) {
+        // Use the TodoRepository to find a Todo by its ID
+        Optional<Todo> optionalTodo = toDoRepository.findById(todoId);
+        return optionalTodo.orElse(null); // Return null if not found, handle as needed
+    }
+
+    public Todo saveTodoWithTasks(Todo todo) {
+        // Save the Todo along with its associated tasks
+        return toDoRepository.save(todo);
+    }
 
 }
